@@ -53,7 +53,20 @@ jobs:
             echo "skim_ggH.root does not exist"
           fi
 
+      - name: check skim
+        run: |
+          if [ -f ./skim ]; then
+            echo "skim exists"
+            chmod +x ./skim
+            if [ -x ./skim ]; then
+              echo "skim is executable"
+            else
+              echo "Failed to make skim executable"
+            fi
+          else
+            echo "skim does not exist"
+          fi
+
       - name: run skim
         run: |
-          chmod +x ./skim
           ./skim root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/GluGluToHToTauTau.root skim_ggH.root 19.6 11467.0 0.1
