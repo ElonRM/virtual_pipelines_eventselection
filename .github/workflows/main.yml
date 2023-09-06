@@ -42,11 +42,11 @@ jobs:
           path: skim
 
       - name: access control
-        run: |
-          printf ${{ secrets.USER_PASS }} | base64 -d | kinit ${{ secrets.USER_NAME }}@CERN.CH
+        run: printf ${{ secrets.USER_PASS }} | base64 -d | kinit ${{ secrets.USER_NAME }}@CERN.CH
 
-      - name: run skim
+      - name: skim
         run: |
           chmod +x ./skim 
+          ./skim root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/GluGluToHToTauTau.root skim_ggH.root 19.6 11467.0 0.1
 
       
