@@ -44,6 +44,7 @@ jobs:
       - name: access control
         run: |
           printf ${{ secrets.USER_PASS }} | base64 -d | kinit ${{ secrets.USER_NAME }}@CERN.CH
+          
       - name: run skim
         run: |
           chmod +x ./skim
