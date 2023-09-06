@@ -3,7 +3,6 @@ on: push
 jobs:
   build_skim:
     runs-on: ubuntu-latest
-    needs: greeting
     container: rootproject/root:6.26.10-conda
     steps:
       - name: checkout repository
