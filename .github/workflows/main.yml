@@ -44,9 +44,16 @@ jobs:
       - name: access control
         run: printf ${{ secrets.USER_PASS }} | base64 -d | kinit ${{ secrets.USER_NAME }}@CERN.CH
 
-      - name: skim
+      - name: check files
         run: |
-          chmod +x ./skim 
-          ./skim root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/GluGluToHToTauTau.root skim_ggH.root 19.6 11467.0 0.1
+          rootls root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/GluGluToHToTauTau.root
+          if [ -f skim_ggH.root ]; then
+            echo "skim_ggH.root exists"
+          else
+            echo "skim_ggH.root does not exist"
+          fi
 
-      
+      - name: run skim
+        run: |
+          chmod +x ./skim
+          ./skim root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/GluGluToHToTauTau.root skim_ggH.root 19.6 11467.0 0.1
